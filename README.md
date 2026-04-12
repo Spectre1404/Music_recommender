@@ -17,17 +17,29 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+This is a content-based recommender. It scores every song against a user taste profile
+and returns the top 5 matches with plain-English explanations.
 
-Some prompts to answer:
+**User profile** stores: `genre`, `mood`, `energy` (0–1), `valence` (0–1), `likes_acoustic` (bool).
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+**Scoring recipe** (max 5.5 points per song):
 
-You can include a simple diagram or bullet list if helpful.
+| Rule | Exact | Neighbor | Miss |
+|---|---|---|---|
+| Genre match | +2.0 | +1.0 | +0.0 |
+| Mood match | +1.5 | +0.75 | +0.0 |
+| Energy proximity | `1.0 × (1 - \|user - song\|)` | — | — |
+| Valence proximity | `0.5 × (1 - \|user - song\|)` | — | — |
+| Acousticness match | +0.5 | — | +0.0 |
+
+Genre neighbors (e.g. `hip-hop ↔ electronic, pop`) and mood neighbors (e.g. `energetic ↔ intense`) give partial credit to close-but-not-exact matches so the top-5 list is never too narrow.
+
+**Data flow:** `user_prefs` → `load_songs()` → `score_song()` for each song → sort descending → top-k slice → ranked output with explanations.
+
+**Known biases:**
+- Genre carries 36% of the max score — a perfect mood/energy match in a neighboring genre will still rank below a weaker genre-exact match.
+- No negative signals — the system cannot penalize songs a user dislikes.
+- Acousticness uses a hard threshold (0.6 / 0.4) rather than a continuous scale, so borderline songs get no partial credit.
 
 ---
 

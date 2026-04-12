@@ -1,0 +1,9 @@
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
+11,Autumn Waltz,Clara Voss,classical,melancholic,0.22,58,0.38,0.28,0.97
+12,Island Morning,Kaya Roots,reggae,uplifting,0.61,85,0.88,0.76,0.63
+13,Pulse Grid,Synthex,electronic,energetic,0.95,140,0.62,0.91,0.03
+14,Dusty Road Home,The Pine Trio,folk,nostalgic,0.33,95,0.72,0.45,0.94
+15,Velvet Undertow,Mara Lane,r&b,melancholic,0.55,88,0.44,0.67,0.41
+16,Golden Hour Drift,Sable Coast,folk,calming,0.29,70,0.76,0.39,0.91
+17,Concrete Jungle,Rhyme District,hip-hop,energetic,0.88,98,0.58,0.85,0.09
+18,Snowfall Sonata,Clara Voss,classical,calming,0.18,52,0.55,0.22,0.98
